@@ -1,0 +1,56 @@
+
+<div class="container mt-3" ng-controller="exceptionCtrl">
+  <!--Modal-->
+  <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Upload a new opprotunity</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p>Drag and drop or select a new IWF CSV file to drop here</p>
+                  <button class="btn btn-primary btn-block mb-3">Upload a new CSV</button>
+                  <small class="text-muted">Not sure what format the IWF is? Use this demo file <a href="">here</a></small>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>What is the opprotunity name?</label>
+              <input type="text" class="form-control" placeholder="Opprptunity name">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">What client is this for?</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Select a client</option>
+                <option>AB</option>
+                <option>AC</option>
+                <option>AD</option>
+                <option>3M</option>
+              </select>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <a href="#!/all_ops">
+            <button type="button" class="btn btn-light float-left" data-dismiss="modal">Cancel</button>
+          </a>
+          <a href="#!/exception_view">
+            <a href="#!/all_ops">
+              <button type="button" class="btn btn-primary">Upload</button>
+            </a>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,209 @@
+<div class="container mt-3" ng-controller="exceptionCtrl">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#!/all_ops">All bids</a>
+        </li>
+        <li class="breadcrumb-item active">
+          <a href="#!/opp_overview">3M Q1 Bid</a>
+        </li>
+        <li class="breadcrumb-item active">Confirm Estimates</li>
+      </ol>
+    </nav>
+
+    <hr ng-show="selectedLane < laneData.length">
+
+    <div class="alert alert-success" ng-hide="selectedLane < laneData.length">
+      <h4 class="alert-heading">Well done!</h4>
+      <p>You have successfully confirmed {{laneData.length}} of {{laneData.length}} lanes.</p>
+      <hr>
+      <p class="mb-0"><a href="#!/opp_overview" class="alert-link">Go back</a> to view the opprotunity</p>
+    </div>
+
+    <div class="status row" ng-show="selectedLane < laneData.length">
+      <div class="col col-2 progress-lane-count">
+        <span>Lane <b>{{selectedLane + 1}}</b> of <b>{{laneData.length}}</b></span>
+      </div>
+      <div class="col col-10">
+        <div class="progress">
+            <div class="progress-bar bg-secondary" role="progressbar" ng-style="progPercentageStyle" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr ng-show="selectedLane < laneData.length">
+
+    <div class="row" ng-show="selectedLane < laneData.length">
+      <div class="col">
+        <h4>{{laneData[selectedLane].pu}} → {{laneData[selectedLane].do}}</h4>
+        <h6 class="mb-0">Expected annual lane volume: {{laneData[selectedLane].lane_volume}}</h6>
+      </div>
+      <div class="col text-right">
+        <h4 class="text-muted">{{laneData[selectedLane].miles | number:1}} miles</h4>
+      </div>
+    </div>
+
+    <hr ng-show="selectedLane < laneData.length">
+
+    <div class="row" ng-show="selectedLane < laneData.length">
+      <div class="col col-4">
+        <div class="estimation">
+          <div class="row">
+            <div class="col">
+              <h4 class="mb-0">Est. cost</h4>
+            </div>
+            <div class="col text-right">
+              <h4>${{baseEstimate | number:2}}</h4>
+            </div>
+          </div>
+          <div class="text-muted">Generated August 2nd, 2018 11:00 AM CST</div>
+
+          <hr>
+
+          <table class="table table-hover table-borderless table-striped">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th scope="col">Estimate</th>
+                  <th class="text-right" scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="rowestimate in laneData[selectedLane].rates">
+                  <td>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" checked>
+                    </div>
+                  </td>
+                  <td>{{rowestimate.name}}</td>
+                  <td class="text-right">${{rowestimate.price}}</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><strong>Variance</strong></td>
+                  <td class="text-right"><strong>18%</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+
+      <div class="col col-8">
+        <div class="adjustments">
+        <div class="step-grade">
+          <div class="row">
+            <div class="col">
+              <h4>Adjusted truck cost</h4>
+            </div>
+            <div class="col text-right">
+              <h4 ng-show="selectedEstimate != baseEstimate">${{selectedEstimate | number:2}}</h4>
+              <h4 ng-show="selectedEstimate == baseEstimate">Same as est.</h4>
+            </div>
+          </div>
+          <!--Lane prev adjusted flag-->
+          <div class="row" ng-show="selectedLane == 2">
+            <div class="col text-muted">
+              <span class="badge badge-success">Confirmed</span>
+              August 5th, 2018 3:28 PM
+            </div>
+            <div class="col text-right text-muted">$1,501.23</div>
+          </div>
+          <!--Lane not adjusted flag-->
+          <div ng-show="selectedLane != 2">
+            <span class="badge badge-warning">Not yet confirmed</span>
+          </div>
+
+          <hr>
+
+          <ul class="nav nav-pills nav-justified">
+            <li class="nav-item">
+              <a class="nav-link" ng-class="{active: !showManual}" ng-click="showManual = false">Quick select (q)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" ng-class="{active: showManual}" ng-click="showManual = true">Manual entry (m)</a>
+            </li>
+          </ul>
+
+          <hr>
+
+          <div ng-hide="showManual">
+            <div class="form-group">
+              <label class="mb-0">Select an amount</label>
+              <small class="form-text text-muted">Use your ← left and right → arrow keys</small>
+            </div>
+
+            <ul class="nav nav-pills nav-justified">
+              <li class="nav-item" ng-click="selectedIndex = 0">
+                <a class="nav-link" ng-class="{active: selectedIndex == 0}">${{baseEstimate * 0.5 | number:2}}</a>
+              </li>
+              <li class="nav-item" ng-click="selectedIndex = 1">
+                <a class="nav-link" ng-class="{active: selectedIndex == 1}" ng-click="updateSelectedIndex(1)">${{baseEstimate * .75 | number:2}}</a>
+              </li>
+              <li class="nav-item" ng-click="selectedIndex = 2">
+                <a class="nav-link" ng-class="{active: selectedIndex == 2}" ng-click="">${{baseEstimate * 1 | number:2}}</a>
+              </li>
+              <li class="nav-item" ng-click="selectedIndex = 3">
+                <a class="nav-link" ng-class="{active: selectedIndex == 3}" ng-click="">${{baseEstimate * 1.25 | number:2}}</a>
+              </li>
+              <li class="nav-item" ng-click="selectedIndex = 4">
+                <a class="nav-link" ng-class="{active: selectedIndex == 4}" ng-click="">${{baseEstimate * 1.5 | number:2}}</a>
+              </li>
+            </ul>
+
+            <ul class="nav nav-pills nav-justified" ng-hide="showManual">
+              <li class="nav-item">
+                <a class="nav-link disabled small">50%</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled small">75%</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled small">100%</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled small">125%</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled small">150%</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div ng-show="showManual">
+          <div class="form-group">
+            <label class="mb-0">Enter a custom amount</label>
+            <small class="form-text text-muted">Please don't enter a custom price unless needed</small>
+          </div>
+
+          <div class="alert alert-danger" role="alert" ng-show="adjustedPercentage > 50 || adjustedPercentage < -50">
+            The difference of ({{adjustedPercentage | number:0}}%)</b> seems to be a mistake
+          </div>
+
+          <div class="input-group input-group-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input id="manualPrice" type="number" class="form-control" placeholder="Amount (to the nearest dollar)" ng-model="selectedEstimate" ng-value="selectedEstimate" min="0">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" ng-click="selectedEstimate = baseEstimate">Reset to est.</button>
+              </div>
+          </div>
+        </div>
+
+        <!--Reason codes-->
+        <div class="form-group" ng-show="selectedEstimate <= lowerBound || selectedEstimate >= upperBound" class="form-group">
+            <hr>
+            <label for="exampleInputEmail1">Why is the the price you entered <b>{{adjustedPercentage | number:0}}%</b> <span ng-show="adjustedPercentage > 0">above</span><span ng-show="adjustedPercentage < 0">below</span> the estimate?</i></label>
+            <ul class="list-group">
+              <li class="list-group-item" ng-class="{active: reasonlist == 0}">Seasonality</li>
+              <li class="list-group-item" ng-class="{active: reasonlist == 1}">Future market conditions</li>
+              <li class="list-group-item" ng-class="{active: reasonlist == 2}">Price this load out</li>
+              <li class="list-group-item" ng-class="{active: reasonlist == 3}">You know Im not even sure</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
