@@ -20,3 +20,14 @@
 .modal {
   display: block !important;
 }
+
+.estimation .card-body {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.quick-select-options .nav-link,
+.quick-select-indicator .nav-link {
+  padding-left: 0;
+  padding-right: 0;
+}

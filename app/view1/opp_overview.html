@@ -9,8 +9,6 @@
     </ol>
   </nav>
 
-  <hr>
-
   <div class="row d-flex align-items-center">
     <div class="col col-5">
       <h4>3M Q1 Bid</h4>
@@ -23,36 +21,96 @@
 
   <hr>
 
-  <div class="status row">
-    <div class="col col-3 progress-lane-count">
-      <span><strong>33%</strong>  of lanes confirmed</b></span>
-    </div>
-    <div class="col col-9">
-      <div class="progress">
-          <div class="progress-bar bg-secondary" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-    </div>
-  </div>
-
-  <hr>
-
   <div class="row">
-    <div class="col col-6">
-      <h4>Overview</h4>
+    <div class="col col-4">
+      <h4 class="mb-3">Overview</h4>
       <ul class="list-unstyled">
-        <li>Client: <span class="float-right">Pepsi</span></li>
-        <li>Account ID: <span class="float-right">2323012</span></li></li>
-        <li>Opprptunity: <span class="float-right">555555</span></li></li>
-        <li>Total annual volume of lanes: <span class="float-right">4,928</span></li>
-        <li>Eligible lanes in bid: <span class="float-right">2,871 of 3,212</span></li>
+        <li><b>Client</b><span class="float-right">Pepsi</span></li>
+        <li><b>Account ID</b><span class="float-right">2323012</span></li></li>
+        <li><b>Account ID</b><span class="float-right">555555</span></li></li>
       </ul>
     </div>
-    <div class="col col-6">
-      <h4>Adjustment details</h4>
-      <ul class="list-unstyled">
-        <li>% of lanes confirmed but <u>not</u> adjusted: <span class="float-right">76%</span></li>
-        <li>% of lanes confirmed <u>and</u> adjusted: <span class="float-right">24%</li>
-      </ul>
+
+    <div class="col col-8">
+      <!--Size-->
+      <h4 class="mb-3">Opprotunity Size</h4>
+      <b>Total annual volume of lanes</b><span class="float-right">4,928</span>
+      <!--Strategy Coverage-->
+      <div class="status row mb-4 mt-3">
+        <div class="col col-6 progress-lane-count">
+          <span>Eligible for UF</b></span>
+        </div>
+        <div class="col col-6">
+          <div class="progress">
+              <div class="progress-bar bg-secondary" role="progressbar" style="width: 77%" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">77%</div>
+          </div>
+        </div>
+      </div>
+      <!--Strategy Coverage-->
+      <div class="status row mb-2">
+        <div class="col col-6 progress-lane-count">
+          <span>Within coverage strat.</b></span>
+        </div>
+        <div class="col col-6">
+          <div class="progress">
+              <div class="progress-bar bg-secondary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!--Progress-->
+      <h4 class="mb-3">Opprotunity Progress</h4>
+      <!--Coverage of volume-->
+      <div class="status row mb-4">
+        <div class="col col-6 progress-lane-count">
+          <span><b>Lane Volume Confirmed</b></span>
+        </div>
+        <div class="col col-6">
+          <div class="progress">
+              <div class="progress-bar bg-secondary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100">89%</div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!--Coverage of lanes-->
+      <div class="status row mb-4">
+        <div class="col col-6 progress-lane-count">
+          <span><b>Lanes Confirmed</b></span>
+        </div>
+        <div class="col col-6">
+          <div class="progress">
+            <div class="progress-bar bg-secondary" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">33%</div>
+          </div>
+        </div>
+      </div>
+
+      <!--Breakdown of adjustments-->
+      <div class="status row mb-4">
+        <div class="col col-6 progress-lane-count">
+          <span>Confirmed not adjusted</b></span>
+        </div>
+        <div class="col col-6">
+          <div class="progress">
+              <div class="progress-bar bg-secondary" role="progressbar" style="width: 76%" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100">76%</div>
+          </div>
+        </div>
+      </div>
+
+      <!--Breakdown of adjustments-->
+      <div class="status row">
+        <div class="col col-6 progress-lane-count">
+          <span>Confirmed and adjusted</b></span>
+        </div>
+        <div class="col col-6">
+          <div class="progress">
+              <div class="progress-bar bg-secondary" role="progressbar" style="width: 24%" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100">24%</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

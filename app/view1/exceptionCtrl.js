@@ -35,6 +35,7 @@ angular.module('myApp.opp_overview', ['ngRoute'])
     $scope.laneData = [{
       "pu":"Las Vegas, NV",
       "do": "New York, NY",
+      "coverage": true,
       "lane_volume": 22,
       "miles": 2234,
       "rate_date": "2012-04-23T18:25:43.511Z",
@@ -48,9 +49,10 @@ angular.module('myApp.opp_overview', ['ngRoute'])
       ]
     },{
       "pu":"New York, NY",
-      "do": "Boston, MA",
+      "do": "Boise, ID",
+      "coverage": false,
       "lane_volume": 12,
-      "miles": 130,
+      "miles": 1230,
       "rate_date": "2012-04-23T18:25:43.511Z",
       "rates": [
         {"name":"Chanview (spot)", "price": 139.00},
@@ -63,6 +65,7 @@ angular.module('myApp.opp_overview', ['ngRoute'])
     },{
       "pu":"Laredo, TX",
       "do": "Austin, TX",
+      "coverage": true,
       "lane_volume": 15,
       "miles": 329.5,
       "rate_date": "2012-04-23T18:25:43.511Z",
@@ -77,21 +80,24 @@ angular.module('myApp.opp_overview', ['ngRoute'])
     }];
 
     // Set up some basic variables for lane adjustments
+    $scope.pressedKeys = 0;
+    $scope.showMarkup = false;
+    $scope.selectedMarkup = 10;
     $scope.selectedLaneVolume = 1;
     $scope.selectedLaneCoverage = 567;
     $scope.selectedLaneCoverage = 567 - ($scope.selectedLaneVolume * 1.2);
 
     // Set up some basic variables for exceptions
     $scope.selectedLane = 0;
-    $scope.selectedIndex = 2;
+    $scope.selectedIndex = 4;
     $scope.reasonlist = 0;
-    $scope.increments = [0.5, 0.75, 1, 1.25, 1.5];
+    $scope.increments = [0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2];
     $scope.baseEstimate = 0;
     $scope.showManual = false;
 
     // Progress calculations
     function calculateProgress() {
-      $scope.progPercentage = 100*(($scope.selectedLane + 1) / $scope.laneData.length);
+      $scope.progPercentage = 100 * (($scope.selectedLane + 1) / $scope.laneData.length);
       $scope.progPercentageStyle = {width: $scope.progPercentage + "%"};
     };
 
@@ -110,7 +116,7 @@ angular.module('myApp.opp_overview', ['ngRoute'])
       };
       // Update lower / upper bounds (estimate data)
       $scope.lowerBound = $scope.baseEstimate * $scope.increments[0];
-      $scope.upperBound = $scope.baseEstimate * $scope.increments[4];
+      $scope.upperBound = $scope.baseEstimate * $scope.increments[9];
     };
 
     // Compare the base estimate to the adjusted estimate
@@ -125,15 +131,26 @@ angular.module('myApp.opp_overview', ['ngRoute'])
       $scope.adjustedPercentage = (($scope.selectedEstimate - $scope.baseEstimate) / $scope.baseEstimate) * 100;
     };
 
+    function selectManualInput() {
+      var manualInput = document.getElementById('manualPrice');
+      manualInput.focus();
+    };
+
     // Rules of what happens when a key is hit
     function indexUpdate(key) {
       // These keys always work
+      // Key 80 = P (Print number of keys pressed)
+      if (key == 80) {
+        alert("Numnber of keys pressed = " + $scope.pressedKeys);
       // Key 81 = Q (Quick select)
-      if (key == 81) {
+      } else if (key == 81) {
         $scope.showManual = false;
-      // Key 77 = M (Manual entry)
-      } else if (key == 77) {
+      // Key 67 = C (Custom entry)
+      } else if (key == 67) {
+      // Key 67 = C (Custom entry)
         $scope.showManual = true;
+      } else if (key == 77) {
+        $scope.showMarkup = !$scope.showMarkup;
       // Key 40 = down arrow (decrease reasonlist by 1)
       } else if ((key == 40) && ($scope.reasonlist <= 2)) {
         $scope.reasonlist += 1;
@@ -141,18 +158,19 @@ angular.module('myApp.opp_overview', ['ngRoute'])
       } else if ((key == 38) && ($scope.reasonlist > 0)) {
         $scope.reasonlist -= 1;
       // Key 13 = Enter (increase selected lane to move to next lane)
-    } else if ((key == 13) && (($scope.selectedLane + 1) < ($scope.laneData.length+1))) {
+      } else if ((key == 13) && (($scope.selectedLane + 1) < ($scope.laneData.length+1))) {
         $scope.selectedLane += 1;
         $scope.selectedIndex = 2;
       };
       // These keys only work if manual mode is OFF
       if ($scope.showManual == false) {
         // Key 39 = right arrow (increase selected index by 1)
-        if ((key == 39) && ($scope.selectedIndex <= 3)) {
+        if ((key == 39) && ($scope.selectedIndex < 8)) {
           $scope.selectedIndex += 1;
         // Key 39 = right arrow (move over to manual)
-        } else if ((key == 39) && ($scope.selectedIndex == 4)) {
+        } else if ((key == 39) && ($scope.selectedIndex == 8)) {
           $scope.showManual = true;
+          console.log("wtf is happenings");
         // Key 37 = left arrow (descrese selected index by 1)
         } else if ((key == 37) && ($scope.selectedIndex > 0)) {
           $scope.selectedIndex -= 1;
@@ -160,6 +178,9 @@ angular.module('myApp.opp_overview', ['ngRoute'])
         } else if ((key == 37) && ($scope.selectedIndex == 0)) {
           $scope.showManual = true;
         }
+        // count the number of pressed keys
+        $scope.pressedKeys += 1;
+        console.log($scope.selectedIndex);
         // Run the cummulative function
         updateAdjustedEstimate();
       };
@@ -167,13 +188,13 @@ angular.module('myApp.opp_overview', ['ngRoute'])
       calculateProgress();
       // Update the estimate differences
       updateDifference();
-      console.log($scope.adjustedPercentage);
       //Need to run this crazy apply to update everything that was set at the top here (WTF)
       $scope.$apply();
+      // Run the update manual fucntion
+      selectManualInput();
     };
 
-    $scope.showAlert = function(message) {
-    };
+    $scope.showAlert = function(message) {};
 
     // Run the calculate progress function
     calculateProgress();
