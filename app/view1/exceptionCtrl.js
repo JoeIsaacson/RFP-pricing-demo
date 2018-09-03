@@ -4,31 +4,7 @@
 // import {laneData} from 'lane_data.json';
 // console.log(laneData)
 
-angular.module('myApp.opp_overview', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/all_ops', {
-    templateUrl: 'view1/all_ops.html',
-    controller: 'exceptionCtrl'
-  })
-  .when('/opp_uploader', {
-    templateUrl: 'view1/opp_uploader.html',
-    controller: 'exceptionCtrl'
-  })
-  .when('/opp_overview', {
-    templateUrl: 'view1/opp_overview.html',
-    controller: 'exceptionCtrl'
-  })
-  .when('/lane_filter', {
-    templateUrl: 'view1/lane_filter.html',
-    controller: 'exceptionCtrl'
-  })
-  .when('/exception_view', {
-    templateUrl: 'view1/exception_view.html',
-    controller: 'exceptionCtrl'
-  });
-
-}])
+angular.module('myApp.opp_module', ['ngRoute'])
 
 .controller('exceptionCtrl', function($scope) {
 

@@ -3,12 +3,35 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
-  'myApp.opp_overview'
+  'myApp.opp_module'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
-  $routeProvider.otherwise({redirectTo: '/opp_overview'});
+  $routeProvider.when('/all_ops', {
+    templateUrl: 'view1/all_ops.html',
+    controller: 'exceptionCtrl'
+  })
+  .when('/opp_uploader', {
+    templateUrl: 'view1/opp_uploader.html',
+    controller: 'exceptionCtrl'
+  })
+  .when('/opp_overview', {
+    templateUrl: 'view1/opp_overview.html',
+    controller: 'exceptionCtrl'
+  })
+  .when('/lane_filter', {
+    templateUrl: 'view1/lane_filter.html',
+    controller: 'exceptionCtrl'
+  })
+  .when('/exception_view', {
+    templateUrl: 'view1/exception_view.html',
+    controller: 'exceptionCtrl'
+  })
+  .otherwise(
+    {redirectTo: '/all_ops'}
+  );
 }]);
+
 // Not sure what I am doing here
 // Trying to Config DB
 // Import a module from not sure where...

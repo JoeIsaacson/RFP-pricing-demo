@@ -1,5 +1,6 @@
 <div class="container mt-3" ng-controller="exceptionCtrl">
 
+    <!--Nav-->
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -12,6 +13,7 @@
       </ol>
     </nav>
 
+    <!--Success Message-->
     <div class="alert alert-success" ng-hide="selectedLane < laneData.length">
       <h4 class="alert-heading">✌ Success</h4>
       <p>You have successfully confirmed {{laneData.length}} of {{laneData.length}} lanes.</p>
@@ -19,6 +21,7 @@
       <p class="mb-0"><a href="#!/opp_overview" class="alert-link">Go back</a> to view the opprotunity</p>
     </div>
 
+    <!--Header-->
     <div class="status" ng-show="selectedLane < laneData.length">
       <div class="progress-lane-count mt-2 mb-3">
         <p class="mb-1">Lane <b>{{selectedLane + 1}}</b> of <b>{{laneData.length}}</b> <small class="text-muted float-right">With annual volume of 18 or above</small></span></p>
@@ -30,52 +33,53 @@
 
     <hr ng-show="selectedLane < laneData.length">
 
+    <!--Lane Geography-->
+    <div class="row mb-3" ng-show="selectedLane < laneData.length">
+      <div class="col col-8">
+        <h4>{{laneData[selectedLane].pu}} → {{laneData[selectedLane].do}}</h4>
+        <h5 class="text-muted">{{laneData[selectedLane].miles | number:1}} miles</h5>
+        <p class="mb-0"><span class="badge badge-danger" ng-show="!laneData[selectedLane].coverage">Not within strategy</span></p>
+        <p class="mb-0 text-muted">Expected annual lane volume: {{laneData[selectedLane].lane_volume}}</p>
+      </div>
+      <div class="col col-4 text-right">
+        <h4>${{selectedEstimate * (1 + (selectedMarkup/100)) | number:0}}</h4>
+      </div>
+    </div>
+
+    <hr ng-show="selectedLane < laneData.length">
+
     <div class="row" ng-show="selectedLane < laneData.length">
       <div class="col col-4">
         <div class="estimation">
-          <div class="">
-
-            <!--Lane Geography-->
-            <div class="mb-3" ng-show="selectedLane < laneData.length">
-              <h4>{{laneData[selectedLane].pu}} → </h4>
-              <h4>{{laneData[selectedLane].do}}</h4>
-              <h5 class="text-muted">{{laneData[selectedLane].miles | number:1}} miles</h5>
-              <p class="mb-0"><span class="badge badge-danger" ng-show="!laneData[selectedLane].coverage">Not within strategy</span></p>
-              <p class="mb-0 text-muted">Expected annual lane volume: {{laneData[selectedLane].lane_volume}}</p>
+          <!--Prices-->
+          <div class="row">
+            <div class="col">
+              <h5 class="mb-0">Est. truck cost</h5>
             </div>
-
-            <hr>
-
-            <!--Prices-->
-            <div class="row">
-              <div class="col">
-                <h5 class="mb-0">Est. truck cost</h5>
-              </div>
-              <div class="col text-right">
-                <h5>${{baseEstimate | number:2}}</h5>
-              </div>
+            <div class="col text-right">
+              <h5>${{baseEstimate | number:2}}</h5>
             </div>
-            <p class="text-muted">Generated August 2nd, 2018 11:00 AM CST</p>
+          </div>
+          <p class="text-muted">Generated August 2nd, 2018 11:00 AM CST</p>
 
-            <table class="table table-hover table-borderless table-striped">
-                <tbody>
-                  <tr ng-repeat="rowestimate in laneData[selectedLane].rates">
-                    <td>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" checked>
-                      </div>
-                    </td>
-                    <td>{{rowestimate.name}}</td>
-                    <td class="text-right">${{rowestimate.price}}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><strong>Variance</strong></td>
-                    <td class="text-right"><strong>18%</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <table class="table table-hover table-borderless table-striped">
+              <tbody>
+                <tr ng-repeat="rowestimate in laneData[selectedLane].rates">
+                  <td>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" checked>
+                    </div>
+                  </td>
+                  <td>{{rowestimate.name}}</td>
+                  <td class="text-right">${{rowestimate.price}}</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><strong>Variance</strong></td>
+                  <td class="text-right"><strong>18%</strong></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
       </div>
 
