@@ -5,26 +5,26 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.opp_module'
 ]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider, $httpClient) {
   $locationProvider.hashPrefix('!');
   $routeProvider.when('/all_ops', {
-    templateUrl: 'view1/all_ops.html',
+    templateUrl: 'opp_list/all_ops.html',
     controller: 'exceptionCtrl'
   })
   .when('/opp_uploader', {
-    templateUrl: 'view1/opp_uploader.html',
+    templateUrl: 'opp_list/opp_uploader.html',
     controller: 'exceptionCtrl'
   })
   .when('/opp_overview', {
-    templateUrl: 'view1/opp_overview.html',
+    templateUrl: 'opp_overview/opp_overview.html',
     controller: 'exceptionCtrl'
   })
   .when('/lane_filter', {
-    templateUrl: 'view1/lane_filter.html',
+    templateUrl: 'exception_tool/lane_filter.html',
     controller: 'exceptionCtrl'
   })
   .when('/exception_view', {
-    templateUrl: 'view1/exception_view.html',
+    templateUrl: 'exception_tool/exception_view.html',
     controller: 'exceptionCtrl'
   })
   .otherwise(
