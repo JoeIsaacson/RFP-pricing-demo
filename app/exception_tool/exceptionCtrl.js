@@ -1,9 +1,5 @@
 'use strict';
 
-// IMPORT JSON LANE DATA
-// import {laneData} from 'lane_data.json';
-// console.log(laneData)
-
 angular.module('myApp.opp_module', ['ngRoute'])
 
 .controller('exceptionCtrl', function($scope, $filter) {

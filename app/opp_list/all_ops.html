@@ -1,32 +1,37 @@
-<div class="container mt-3" ng-controller="exceptionCtrl">
+<div class="container mt-3" ng-controller="rfpListCtrl">
 
   <!--Nav-->
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item">All opportunities</li>
+      <li class="breadcrumb-item">All RFPs</li>
     </ol>
   </nav>
 
+  <!--Filter Bar-->
   <div class="row mb-5">
     <div class="col">
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" checked>
-        <label class="form-check-label" for="exampleCheck1">Only show me open opportunities</label>
+        <label class="form-check-label" for="exampleCheck1">Only show me open RFPs</label>
       </div>
     </div>
     <div class="col text-right">
       <a href="#!/opp_uploader">
-        <button type="button" class="btn btn-secondary">Upload a new opprotunity</button>
+        <button type="button" class="btn btn-secondary">Upload a new RFP</button>
       </a>
     </div>
   </div>
 
+  <!--List-->
   <div class="row d-flex align-items-center">
-    <div class="col col-5">
-      <h5>Opprotunity</h5>
+    <div class="col col-3">
+      <h5>RFP Name</h5>
     </div>
-    <div class="col col-2">
-      <h5>Uploaded</h5>
+    <div class="col col-2 text-center">
+      <h5>Start</h5>
+    </div>
+    <div class="col col-2 text-center">
+      <h5>End</h5>
     </div>
     <div class="col col-1 text-center">
       <h5>Status</h5>
@@ -37,142 +42,35 @@
     <div class="col col-2 text-center"></div>
   </div>
 
+  <hr></hr>
+
+  <div ng-repeat="rfp in rfpList">
+    <div class="row d-flex align-items-center">
+      <div class="col col-3">
+        <h4>{{rfp.name}}</h4>
+        <p class="text-muted mb-0">Last modified {{rfp.last_updated}}</p>
+      </div>
+      <div class="col col-2 text-center">
+        <p class="text-muted mb-0">{{rfp.start_date}}</p>
+      </div>
+      <div class="col col-2 text-center">
+        <p class="text-muted mb-0">{{rfp.end_date}}</p>
+      </div>
+      <div class="col col-1 text-center">
+        <h6>
+          <span class="badge badge-primary" ng-show="rfp.status_open">Open</span>
+          <span class="badge badge-warning" ng-hide="rfp.status_open">Processing</span>
+        </h6>
+      </div>
+      <div class="col col-2 text-center">
+        <p class="text-muted mb-0">{{rfp.due_date}}</p>
+      </div>
+      <div class="col col-2 text-center">
+        <a href="#!/opp_overview">
+          <button type="button" class="btn btn-light">View</button>
+        </a>
+      </div>
+    </div>
   <hr>
-
-  <div class="row d-flex align-items-center">
-    <div class="col col-5">
-      <h4>3M Q1 Bid</h4>
-      <p class="text-muted mb-0">Last modified August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-1 text-center">
-      <h6><span class="badge badge-primary">Open</span></h6>
-    </div>
-    <div class="col col-2 text-center">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2 text-center">
-      <a href="#!/opp_overview">
-        <button type="button" class="btn btn-light">View</button>
-      </a>
-    </div>
   </div>
-
-  <hr>
-
-  <div class="row d-flex align-items-center">
-    <div class="col col-5">
-      <h4>Nabisco 2019 Bid</h4>
-      <p class="text-muted mb-0">Last modified August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-1 text-center">
-      <h6><span class="badge badge-warning">Processing</span></h6>
-    </div>
-    <div class="col col-2 text-center">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2 text-center">
-      <a href="#!/opp_overview">
-        <button type="button" class="btn btn-light">View</button>
-      </a>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row d-flex align-items-center">
-    <div class="col col-5">
-      <h4>Apple Q1 Bid</h4>
-      <p class="text-muted mb-0">Last modified August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-1 text-center">
-      <h6><span class="badge badge-primary">Open</span></h6>
-    </div>
-    <div class="col col-2 text-center">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2 text-center">
-      <a href="#!/opp_overview">
-        <button type="button" class="btn btn-light">View</button>
-      </a>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row d-flex align-items-center">
-    <div class="col col-5">
-      <h4>BigfootSockCo Q1 Bid</h4>
-      <p class="text-muted mb-0">Last modified August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-1 text-center">
-      <h6><span class="badge badge-primary">Open</span></h6>
-    </div>
-    <div class="col col-2 text-center">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2 text-center">
-      <a href="#!/opp_overview">
-        <button type="button" class="btn btn-light">View</button>
-      </a>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row d-flex align-items-center">
-    <div class="col col-5">
-      <h4>Niagara Q2 Bid</h4>
-      <p class="text-muted mb-0">Last modified August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-1 text-center">
-      <h6><span class="badge badge-primary">Open</span></h6>
-    </div>
-    <div class="col col-2 text-center">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2 text-center">
-      <a href="#!/opp_overview">
-        <button type="button" class="btn btn-light">View</button>
-      </a>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row d-flex align-items-center">
-    <div class="col col-5">
-      <h4>Dell Q1 Bid</h4>
-      <p class="text-muted mb-0">Last modified August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-1 text-center">
-      <h6><span class="badge badge-primary">Open</span></h6>
-    </div>
-    <div class="col col-2 text-center">
-      <p class="text-muted mb-0">August 2nd, 2018 11:00 AM CST</p>
-    </div>
-    <div class="col col-2 text-center">
-      <a href="#!/opp_overview">
-        <button type="button" class="btn btn-light">View</button>
-      </a>
-    </div>
-  </div>
-
 </div>

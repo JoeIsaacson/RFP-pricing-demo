@@ -9,7 +9,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
   $locationProvider.hashPrefix('!');
   $routeProvider.when('/all_ops', {
     templateUrl: 'opp_list/all_ops.html',
-    controller: 'exceptionCtrl'
+    controller: 'rfpListCtrl'
   })
   .when('/opp_uploader', {
     templateUrl: 'opp_list/opp_uploader.html',
