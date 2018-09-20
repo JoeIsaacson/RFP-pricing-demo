@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.opp_module', ['ngRoute'])
+angular.module('myApp.exceptionView', ['ngRoute'])
 
 .controller('exceptionCtrl', function($scope, $filter) {
 

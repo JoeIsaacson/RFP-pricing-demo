@@ -3,7 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
-  'myApp.opp_module'
+  'myApp.opp_module',
+  'myApp.exceptionView'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider, $httpClient) {
   $locationProvider.hashPrefix('!');
