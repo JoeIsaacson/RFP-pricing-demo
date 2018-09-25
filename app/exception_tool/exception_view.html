@@ -38,7 +38,7 @@
     <div class="row mb-3" ng-show="selectedLane < laneData.length">
       <div class="col col-8">
         <h4>{{laneData[selectedLane].pu}} → {{laneData[selectedLane].do}}</h4>
-        <h6><a href="https://www.google.com/maps/place/{{laneData[selectedLane].pu_zip}}">{{laneData[selectedLane].pu_zip}}</a><small class="text-muted">[p]</small> → <a href="https://www.google.com/maps/place/{{laneData[selectedLane].do_zip}}">{{laneData[selectedLane].do_zip}}[do]</a><small class="text-muted">[d]</small></h6>
+        <h6><a href="https://www.google.com/maps/place/{{laneData[selectedLane].pu_zip}}">{{laneData[selectedLane].pu_zip}}</a><small class="text-muted">[p]</small> → <a href="https://www.google.com/maps/place/{{laneData[selectedLane].do_zip}}">{{laneData[selectedLane].do_zip}}</a><small class="text-muted">[d]</small></h6>
         <p class="mb-0 text-muted">Expected annual lane volume: {{laneData[selectedLane].lane_volume}}</p>
       </div>
       <div class="col col-4 text-right">
@@ -55,7 +55,7 @@
       <div class="col col-5">
         <div class="row">
           <div class="col col-8">
-            <h5>Historical overall estimate</h5>
+            <h5>Avg. Historical Estimate</h5>
           </div>
           <div class="col text-right col-4">
             <h5>${{baseEstimate | number:0}}</h5>
@@ -89,7 +89,10 @@
         <!--Final lane rate-->
         <div class="row">
           <div class="col col-8">
-            <h5>What we should charge for this lane</h5>
+            <h5>Truck Cost
+              <!--Lane not adjusted flag-->
+              <span ng-show="selectedLane != 2" class="badge badge-warning">Estimate not yet confirmed</span>
+            </h5>
           </div>
           <div class="col col-4 text-right">
             <h5>${{selectedEstimate | number:0}}</h5>
@@ -103,23 +106,17 @@
           </div>
           <div class="col text-right text-muted">$1,501</div>
         </div>
-        <!--Lane not adjusted flag-->
-        <div ng-show="selectedLane != 2">
-          <span class="badge badge-warning">Estimate not yet confirmed</span>
-        </div>
         <!--warning-->
         <div class="alert alert-danger mt-2" role="alert" ng-show="adjustedPercentage > 50 || adjustedPercentage < -50">
           The difference of ({{adjustedPercentage | number:0}}%)</b> seems to be a mistake
         </div>
         <!--Truck cost section-->
 
-        <hr>
-
         <!--Select markup manually-->
         <div class="form-group mt-2">
-          <label>1. Truck cost for UF</label>
-          <label class="float-right" ng-hide="truckCost == baseEstimate">${{truckCost | number:0 }}</label>
-          <span class="badge badge-secondary float-right" ng-show="truckCost == baseEstimate">Same as estimate</span>
+          <!-- <label>1. Truck cost for UF</label> -->
+          <!-- <label class="float-right" ng-hide="truckCost == baseEstimate">${{truckCost | number:0 }}</label>
+          <span class="badge badge-secondary float-right" ng-show="truckCost == baseEstimate">Same as estimate</span> -->
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-default">$</span>
@@ -128,18 +125,18 @@
           </div>
           <small class="form-text text-muted">Use your [a] left and right [d] arrow keys to adjust the truck cost</small>
 
-          <ul class="quick-select-indicator nav nav-pills nav-justified mt-2">
+          <!-- <ul class="quick-select-indicator nav nav-pills nav-justified mt-2">
             <li class="nav-item" ng-repeat="adjustOption in truckCostIncrements">
               <a class="nav-link disabled small" ng-class="{active: $index == truckCostIndex}" ng-click="truckCostIndex = $index">{{100 + ((adjustOption - 1) * 100) | number:0}}%</a>
             </li>
-          </ul>
+          </ul> -->
         </div>
 
         <hr>
 
         <!--Select markup manually-->
         <div class="form-group mt-2">
-          <label>2. UF Markup</label>
+          <!-- <label>2. UF Markup</label> -->
           <label class="float-right">{{ (markupIncrements[selectedIndex] * 100) | number:0}}%</label>
           <div class="input-group">
             <div class="input-group-prepend">
@@ -150,11 +147,11 @@
 
           <small class="form-text text-muted">Use your [←] left and right [→] arrow keys to adjust the markup</small>
 
-          <ul class="quick-select-indicator nav nav-pills nav-justified mt-2">
+          <!-- <ul class="quick-select-indicator nav nav-pills nav-justified mt-2">
             <li class="nav-item" ng-repeat="adjustMarkup in truckCostIncrements">
               <a class="nav-link disabled small" ng-class="{active: $index == selectedIndex}">{{(adjustMarkup * 100) - 100 | number:0}}%</a>
             </li>
-          </ul>
+          </ul> -->
         </div>
 
         <!--Reason codes-->
