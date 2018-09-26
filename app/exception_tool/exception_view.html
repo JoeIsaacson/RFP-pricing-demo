@@ -1,7 +1,7 @@
 <div class="container mt-3" ng-controller="exceptionCtrl">
 
     <!--Nav-->
-    <nav aria-label="breadcrumb">
+    <nav class="mb-3" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="#!/all_ops">All opportunities</a>
@@ -22,17 +22,16 @@
     </div>
 
     <!--Header-->
-    <div class="status" ng-show="selectedLane < laneData.length">
+    <div class="status mb-4" ng-show="selectedLane < laneData.length">
       <div class="progress-lane-count mt-2 mb-3">
         <p class="mb-1">Lane <b>{{selectedLane + 1}}</b> of <b>{{laneData.length}}</b> <small class="text-muted float-right">With annual volume of 18 or above</small></span></p>
       </div>
       <div class="progress">
-          <div class="progress-bar bg-secondary" role="progressbar" ng-style="progPercentageStyle" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-secondary" role="progressbar" ng-style="progPercentageStyle" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
     </div>
 
-    <hr></hr>
-
+    <hr ng-show="selectedLane < laneData.length">
 
     <!--Lane Geography-->
     <div class="row mb-3" ng-show="selectedLane < laneData.length">
@@ -43,128 +42,141 @@
       </div>
       <div class="col col-4 text-right">
         <h5 class="text-muted">{{laneData[selectedLane].miles | number:0}} miles</h5>
-        <!-- <p class="mb-0"><span class="badge badge-danger" ng-show="!laneData[selectedLane].coverage">Not within strategy</span></p> -->
+        <span ng-show="selectedLane != 2" class="badge badge-warning">Estimate not yet confirmed</span>
+        <span ng-show="selectedLane == 2" class="badge badge-success">Estimate already confirmed</span>
       </div>
     </div>
 
-    <hr></hr>
-    <hr>
-
-    <div class="row" ng-show="selectedLane < laneData.length">
+    <div class="card" ng-show="selectedLane < laneData.length">
+      <div class="card-body">
       <!--Truck estimation-->
-      <div class="col col-5">
-        <div class="row">
-          <div class="col col-8">
-            <h5>Avg. Historical Estimate</h5>
-          </div>
-          <div class="col text-right col-4">
-            <h5>${{baseEstimate | number:0}}</h5>
-          </div>
+      <div class="row">
+        <div class="col col-8">
+          <h5>Step 1: Review Avg. Historical Truck Cost</h5>
         </div>
-        <p class="text-muted">Estimated August 2nd, 2018 11:00 AM CST</p>
-        <hr>
-        <div class="estimation">
-          <table class="table table-hover table-borderless table-striped">
-            <tbody>
-              <tr ng-repeat="rowestimate in laneData[selectedLane].rates">
-                <td>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" checked>
-                  </div>
-                </td>
-                <td>{{rowestimate.name}}</td>
-                <td class="text-right">${{rowestimate.price | number:0}}</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><strong>Variance</strong></td>
-                <td class="text-right"><strong>18%</strong></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col text-right col-4">
+          <h5>${{baseEstimate | number:2}}</h5>
         </div>
       </div>
-      <!--Adjustment section-->
-      <div class="col col-7">
-        <!--Final lane rate-->
-        <div class="row">
-          <div class="col col-8">
-            <h5>Truck Cost
-              <!--Lane not adjusted flag-->
-              <span ng-show="selectedLane != 2" class="badge badge-warning">Estimate not yet confirmed</span>
-            </h5>
-          </div>
-          <div class="col col-4 text-right">
-            <h5>${{selectedEstimate | number:0}}</h5>
-          </div>
-        </div>
-        <!--Lane prev adjusted flag-->
-        <div class="row" ng-show="selectedLane == 2">
-          <div class="col text-muted">
-            <span class="badge badge-success">Confirmed</span>
-            August 5th, 2018 3:28 PM
-          </div>
-          <div class="col text-right text-muted">$1,501</div>
-        </div>
-        <!--warning-->
-        <div class="alert alert-danger mt-2" role="alert" ng-show="adjustedPercentage > 50 || adjustedPercentage < -50">
-          The difference of ({{adjustedPercentage | number:0}}%)</b> seems to be a mistake
-        </div>
-        <!--Truck cost section-->
+      <p class="text-muted">Estimated August 2nd, 2018 11:00 AM CST with a <b>variance of 18%</b></p>
 
-        <!--Select markup manually-->
-        <div class="form-group mt-2">
-          <!-- <label>1. Truck cost for UF</label> -->
-          <!-- <label class="float-right" ng-hide="truckCost == baseEstimate">${{truckCost | number:0 }}</label>
-          <span class="badge badge-secondary float-right" ng-show="truckCost == baseEstimate">Same as estimate</span> -->
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">$</span>
-            </div>
-            <input type="number" class="form-control text-center form-control-lg" placeholder="Amount (to the nearest dollar)" ng-model="truckCost" min="0">
-          </div>
-          <small class="form-text text-muted">Use your [a] left and right [d] arrow keys to adjust the truck cost</small>
-
-          <!-- <ul class="quick-select-indicator nav nav-pills nav-justified mt-2">
-            <li class="nav-item" ng-repeat="adjustOption in truckCostIncrements">
-              <a class="nav-link disabled small" ng-class="{active: $index == truckCostIndex}" ng-click="truckCostIndex = $index">{{100 + ((adjustOption - 1) * 100) | number:0}}%</a>
-            </li>
-          </ul> -->
-        </div>
-
-        <hr>
-
-        <!--Select markup manually-->
-        <div class="form-group mt-2">
-          <!-- <label>2. UF Markup</label> -->
-          <label class="float-right">{{ (markupIncrements[selectedIndex] * 100) | number:0}}%</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">$</span>
-            </div>
-            <input type="number" class="form-control text-center form-control-lg" placeholder="Amount (to the nearest dollar)" ng-model="selectedEstimate" min="0">
-          </div>
-
-          <small class="form-text text-muted">Use your [←] left and right [→] arrow keys to adjust the markup</small>
-
-          <!-- <ul class="quick-select-indicator nav nav-pills nav-justified mt-2">
-            <li class="nav-item" ng-repeat="adjustMarkup in truckCostIncrements">
-              <a class="nav-link disabled small" ng-class="{active: $index == selectedIndex}">{{(adjustMarkup * 100) - 100 | number:0}}%</a>
-            </li>
-          </ul> -->
-        </div>
-
-        <!--Reason codes-->
-        <!-- <div class="form-group" ng-show="selectedEstimate <= lowerBound || selectedEstimate >= upperBound" class="form-group">
-            <label for="exampleInputEmail1">Why is the the price you entered <b>{{adjustedPercentage | number:0}}%</b> <span ng-show="adjustedPercentage > 0">above</span><span ng-show="adjustedPercentage < 0">below</span> the estimate?</i></label>
-            <ul class="list-group">
-              <li class="list-group-item" ng-class="{active: reasonlist == 0}">Seasonality</li>
-              <li class="list-group-item" ng-class="{active: reasonlist == 1}">Future market conditions</li>
-              <li class="list-group-item" ng-class="{active: reasonlist == 2}">Price this load out</li>
-              <li class="list-group-item" ng-class="{active: reasonlist == 3}">You know Im not even sure</li>
-            </ul>
-        </div> -->
-
+      <div class="estimation">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-center" ng-repeat="rowestimate in laneData[selectedLane].rates">{{rowestimate.name}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center" ng-repeat="rowestimate in laneData[selectedLane].rates">${{rowestimate.price | number:0}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
+      <hr></hr>
+
+      <!--warning-->
+      <div class="alert alert-danger mt-2" role="alert" ng-show="selectedLane == 2">
+        The difference of ({{adjustedPercentage | number:0}}%)</b> seems to be a mistake
+      </div>
+      <!--Select markup manually-->
+      <div class="row">
+        <div class="col col-8">
+          <h5>Step 2. Confirm Truck Cost</h5>
+          <span class="text-muted">Use your [a] left and right [s] arrow keys to adjust the truck cost</span>
+        </div>
+        <div class="col col-4 text-right">
+          <div class="form-group mb-0">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">$</span>
+              </div>
+              <input type="number" class="form-control text-center form-control-lg" placeholder="Amount (to the nearest dollar)" ng-model="truckCost" min="0">
+            </div>
+          </div>
+        </div>
+        <!-- <ul class="quick-select-indicator nav nav-pills nav-justified mt-2">
+          <li class="nav-item" ng-repeat="adjustOption in truckCostIncrements">
+            <a class="nav-link disabled small" ng-class="{active: $index == truckCostIndex}" ng-click="truckCostIndex = $index">{{100 + ((adjustOption - 1) * 100) | number:0}}%</a>
+          </li>
+        </ul> -->
+      </div>
+
+      <!--Lane prev adjusted flag-->
+      <div class="row mt-3" ng-show="selectedLane == 2">
+        <div class="col text-muted">
+          <span class="badge badge-success">Confirmed</span>
+          August 5th, 2018 3:28 PM
+        </div>
+        <div class="col text-right text-muted">$1,501</div>
+      </div>
+
+      <!--Select an overage reason label-->
+      <form class="form" ng-show="selectedLane == 2" >
+        <hr>
+        <div class="form-group">
+          <label>Why is the truck cost you entered significantly different than the historical estimate?</label>
+          <select class="form-control form-control-lg">
+            <option>No reason selected</option>
+            <option>Reason A</option>
+            <option>Reason B</option>
+            <option>Reason C</option>
+            <option>Reason C</option>
+          </select>
+        </div>
+      </form>
+
+      <hr></hr>
+
+      <!--Select markup manually-->
+      <div class="row">
+        <div class="col col-8">
+          <h5>Step 3. Adjust Markup</h5>
+          <span class="text-muted">Use your [←] left and right [→] arrow keys to adjust the markup</span>
+        </div>
+        <div class="col col-4 text-right">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">%</span>
+              </div>
+              <input type="number" class="form-control text-center form-control-lg" placeholder="Percentage" min="0" max="0" value="0.7%">
+            </div>
+            <!-- <ul class="quick-select-indicator nav nav-pills nav-justified mt-2">
+              <li class="nav-item" ng-repeat="adjustMarkup in truckCostIncrements">
+                <a class="nav-link disabled small" ng-class="{active: $index == selectedIndex}">{{(adjustMarkup * 100) - 100 | number:0}}%</a>
+              </li>
+            </ul> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card border-primary mt-2">
+        <div class="card-body text-primary">
+          <div class="row">
+            <div class="col col-8">
+              This is the rate we will charge before deducting fuel surcharge
+            </div>
+            <div class="col col-4 text-right">
+              <b>${{selectedEstimate | number:2}}</b>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <!--Reason codes-->
+      <!-- <div class="form-group" ng-show="selectedEstimate <= lowerBound || selectedEstimate >= upperBound" class="form-group">
+          <label for="exampleInputEmail1">Why is the the price you entered <b>{{adjustedPercentage | number:0}}%</b> <span ng-show="adjustedPercentage > 0">above</span><span ng-show="adjustedPercentage < 0">below</span> the estimate?</i></label>
+          <ul class="list-group">
+            <li class="list-group-item" ng-class="{active: reasonlist == 0}">Seasonality</li>
+            <li class="list-group-item" ng-class="{active: reasonlist == 1}">Future market conditions</li>
+            <li class="list-group-item" ng-class="{active: reasonlist == 2}">Price this load out</li>
+            <li class="list-group-item" ng-class="{active: reasonlist == 3}">You know Im not even sure</li>
+          </ul>
+      </div> -->
     </div>
 </div>
