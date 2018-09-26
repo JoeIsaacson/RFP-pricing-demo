@@ -23,8 +23,24 @@
 
     <!--Header-->
     <div class="status mb-4" ng-show="selectedLane < laneData.length">
-      <div class="progress-lane-count mt-2 mb-3">
-        <p class="mb-1">Lane <b>{{selectedLane + 1}}</b> of <b>{{laneData.length}}</b> <small class="text-muted float-right">With annual volume of 18 or above</small></span></p>
+      <div class="progress-lane-count mt-2 mb-3 row">
+        <div class="col col-8">
+          <p class="mt-2">Lane <b>{{selectedLane + 1}}</b> of <b>{{laneData.length}}</b>
+            <small class="text-muted">(with annual volume of 15 to 18)</small>
+          </p>
+        </div>
+        <div class="col col-4">
+          <form>
+            <div class="form-group mb-0">
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Jump to lane (#)" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="button">Go</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="progress">
         <div class="progress-bar bg-secondary" role="progressbar" ng-style="progPercentageStyle" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100"></div>
@@ -153,20 +169,15 @@
         </div>
       </div>
 
-      <div class="card border-primary mt-2">
-        <div class="card-body text-primary">
-          <div class="row">
-            <div class="col col-8">
-              This is the rate we will charge before deducting fuel surcharge
-            </div>
-            <div class="col col-4 text-right">
-              <b>${{selectedEstimate | number:2}}</b>
-            </div>
-          </div>
+      <div class="row text-primary mt-3">
+        <div class="col col-8">
+          This is the rate we will charge before deducting fuel surcharge
+        </div>
+        <div class="col col-4 text-right">
+          <b>${{selectedEstimate | number:2}}</b>
         </div>
       </div>
-      </div>
-      </div>
+      <button type="button" class="btn btn-light btn-sm btn-block mt-3">Continue</button>
 
       <!--Reason codes-->
       <!-- <div class="form-group" ng-show="selectedEstimate <= lowerBound || selectedEstimate >= upperBound" class="form-group">
