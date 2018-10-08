@@ -3,11 +3,11 @@
   "do": "New York, NY",
   "miles": 2234,
   "rates": [
-    {"name":"Chanview (spot)", "price": 200.23},
-    {"name":"Chanview (contract)", "price": 200.23},
-    {"name":"DAT (30 day)", "price": 200.23},
-    {"name":"DAT (90 day)", "price": 200.23},
-    {"name":"DAT (1 year)", "price": 200.23},
+    {"name":"Chainalytics (spot)", "price": 200.23},
+    {"name":"Chainalytics (contract)", "price": 200.23},
+    {"name":"Rateview (30 day)", "price": 200.23},
+    {"name":"Rateview (90 day)", "price": 200.23},
+    {"name":"Rateview (1 year)", "price": 200.23},
     {"name":"Uber Freight", "price": 200.23}
   ]
 },{
@@ -15,8 +15,8 @@
   "do": "Boston, MA",
   "miles": 130,
   "rates": [
-    {"name":"Chanview (spot)", "price": 20},
-    {"name":"Chanview (contract)", "price": 20},
+    {"name":"Chainalytics (spot)", "price": 20},
+    {"name":"Chainalytics (contract)", "price": 20},
     {"name":"DAT (30 day)", "price": 20},
     {"name":"DAT (90 day)", "price": 20},
     {"name":"DAT (1 year)", "price": 20},

@@ -53,13 +53,29 @@
     <div class="row mb-3" ng-show="selectedLane < laneData.length">
       <div class="col col-8">
         <h4>{{laneData[selectedLane].pu}} → {{laneData[selectedLane].do}}</h4>
-        <h6><a href="https://www.google.com/maps/place/{{laneData[selectedLane].pu_zip}}">{{laneData[selectedLane].pu_zip}}</a><small class="text-muted">[p]</small> → <a href="https://www.google.com/maps/place/{{laneData[selectedLane].do_zip}}">{{laneData[selectedLane].do_zip}}</a><small class="text-muted">[d]</small></h6>
+        <h6>
+          <a target="blank" href="https://www.google.com/maps/place/{{laneData[selectedLane].pu_zip}}">{{laneData[selectedLane].pu_zip}}</a>
+          <small class="text-muted">[p]</small> → <a target="blank" href="https://www.google.com/maps/place/{{laneData[selectedLane].do_zip}}">{{laneData[selectedLane].do_zip}}</a>
+          <small class="text-muted">[d]</small>
+          <span ng-show="selectedLane != 2" class="badge badge-success">🌵 Dry van load</span>
+          <span ng-show="selectedLane == 2" class="badge badge-primary">❄️ Reefer load</span>
+        </h6>
         <p class="mb-0 text-muted">Expected annual lane volume: {{laneData[selectedLane].lane_volume}}</p>
       </div>
       <div class="col col-4 text-right">
         <h5 class="text-muted">{{laneData[selectedLane].miles | number:0}} miles</h5>
         <span ng-show="selectedLane != 2" class="badge badge-warning">Estimate not yet confirmed</span>
         <span ng-show="selectedLane == 2" class="badge badge-success">Estimate already confirmed</span>
+      </div>
+    </div>
+
+    <!--Map View-->
+    <div class="row">
+      <div class="col col-6">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3219.94234140359!2d-115.16146048472716!3d36.19228408007829!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c3ca01164bb1%3A0x4c1f94f887857cc5!2sLas+Vegas%2C+NV+89106!5e0!3m2!1sen!2sus!4v1539021969074" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+      <div class="col col-6">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.5689687015138!2d-73.98225318459451!3d40.72750427933021!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25893c45d1643%3A0x603ac2f350ab72a2!2sNew+York%2C+NY+10009!5e0!3m2!1sen!2sus!4v1539022018353" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -136,10 +152,10 @@
           <label>Why is the truck cost you entered significantly different than the historical estimate?</label>
           <select class="form-control form-control-lg">
             <option>No reason selected</option>
-            <option>Reason A</option>
-            <option>Reason B</option>
-            <option>Reason C</option>
-            <option>Reason C</option>
+            <option>[q] Seasonality not factored into estimates</option>
+            <option>[w] High variance between estimates</option>
+            <option>[e] Undesirable lane (Geography)</option>
+            <option>[r] Don’t trust estimates</option>
           </select>
         </div>
       </form>

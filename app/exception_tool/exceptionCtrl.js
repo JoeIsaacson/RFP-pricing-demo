@@ -14,11 +14,11 @@ angular.module('myApp.exceptionView', ['ngRoute'])
       "miles": 2234,
       "rate_date": "2012-04-23T18:25:43.511Z",
       "rates": [
-        {"name":"Chanview (spot)", "price": 1000.23},
-        {"name":"Chanview (contract)", "price": 1350.6},
-        {"name":"DAT (30 day)", "price": 1129.45},
-        {"name":"DAT (90 day)", "price": 1205.45},
-        {"name":"DAT (1 year)", "price": 1233.45},
+        {"name":"Chainalytics (spot)", "price": 1000.23},
+        {"name":"Chainalytics (contract)", "price": 1350.6},
+        {"name":"DAT Rateview (30 day)", "price": 1129.45},
+        {"name":"DAT Rateview (90 day)", "price": 1205.45},
+        {"name":"DAT Rateview (1 year)", "price": 1233.45},
         {"name":"Uber Freight", "price": 1144.45}
       ]
     },{
@@ -31,11 +31,11 @@ angular.module('myApp.exceptionView', ['ngRoute'])
       "miles": 1230,
       "rate_date": "2012-04-23T18:25:43.511Z",
       "rates": [
-        {"name":"Chanview (spot)", "price": 139.00},
-        {"name":"Chanview (contract)", "price": 190.25},
-        {"name":"DAT (30 day)", "price": 195.20},
-        {"name":"DAT (90 day)", "price": 115.25},
-        {"name":"DAT (1 year)", "price": 140.50},
+        {"name":"Chainalytics (spot)", "price": 139.00},
+        {"name":"Chainalytics (contract)", "price": 190.25},
+        {"name":"DAT Rateview (30 day)", "price": 195.20},
+        {"name":"DAT Rateview (90 day)", "price": 115.25},
+        {"name":"DAT Rateview (1 year)", "price": 140.50},
         {"name":"Uber Freight", "price": 155.25}
       ]
     },{
@@ -48,11 +48,11 @@ angular.module('myApp.exceptionView', ['ngRoute'])
       "miles": 329.5,
       "rate_date": "2012-04-23T18:25:43.511Z",
       "rates": [
-        {"name":"Chanview (spot)", "price": 339.30},
-        {"name":"Chanview (contract)", "price": 290.25},
-        {"name":"DAT (30 day)", "price": 295.20},
-        {"name":"DAT (90 day)", "price": 315.25},
-        {"name":"DAT (1 year)", "price": 340.25},
+        {"name":"Chainalytics (spot)", "price": 339.30},
+        {"name":"Chainalytics (contract)", "price": 290.25},
+        {"name":"DAT Rateview (30 day)", "price": 295.20},
+        {"name":"DAT Rateview (90 day)", "price": 315.25},
+        {"name":"DAT Rateview (1 year)", "price": 340.25},
         {"name":"Uber Freight", "price": 355.25}
       ]
     }];
